@@ -28,15 +28,13 @@ material_collapsible <- function(..., depth = NULL, color = NULL,
   )
 }
 
-#' @import future
-#' @import promises
+#' @importFrom future future multisession plan value
 #' @importFrom fs path_home
 #' @import shiny 
 #' @importFrom shinyFiles getVolumes parseSavePath shinyFileSave shinySaveButton
 #' @importFrom tools file_ext
 #' @importFrom tools file_path_sans_ext
 #' @importFrom  htmltools span tags HTML div h4 h5 h6
-#' @import future
 #' @import promises
 #' @import Certara.RsNLME
 #' @import shinymeta
@@ -64,7 +62,7 @@ material_collapsible <- function(..., depth = NULL, color = NULL,
   requireNamespace("shiny", quietly = TRUE)
   requireNamespace("bslib", quietly = TRUE)
 
-  plan(multisession)#, workers = availableCores()/2)
+  plan(multisession)
   process_start_time <- NULL
   
   if (model@isPopulation && model@columnMapping@mapping[["id"]]@columnName == "?") {
